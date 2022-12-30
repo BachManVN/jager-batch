@@ -3,11 +3,8 @@ package com.jager.batch.rest;
 import com.jager.batch.dto.JobExecutionDTO;
 import com.jager.batch.dto.JobExecutionParameterInputDTO;
 import com.jager.batch.service.rest.JobRestService;
-import org.apache.commons.lang3.SystemUtils;
-import org.springframework.batch.core.Job;
 import org.springframework.batch.core.launch.JobOperator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,13 +24,13 @@ public class TestRestAPIs {
 	@Autowired
 	JobOperator jobOperator;
 	
-	@Autowired
-	@Qualifier("helloWorld")
-	Job job;
+//	@Autowired
+//	@Qualifier("helloWorld")
+//	Job job;
 	
 	
-	@GetMapping("/hello")
-	public String adminAccess() {
+//	@PostMapping("/api/startJob")
+//	public List<JobExecutionParameterInputDTO> adminAccess() {
 		
 //		System.out.println("job "+ job.getName());
 //		jobOperator.getJobNames().forEach(name ->{
@@ -44,9 +41,10 @@ public class TestRestAPIs {
 //		listParas.add(new JobExecutionParameterInputDTO().builder().name("isDocked").value("true").build());
 		//listParas.add(new JobExecutionParameterInputDTO().builder().name("runtId").value(System.currentTimeMillis()+"").build());
 		//jobRestService.start("studentGradeReportJob",listParas);
-		//jobRestService.start("studentGradeReportJob",listParas);
-		return "Hello";
-	}
+
+//		jobRestService.start("studentGradeReportJob",listParas);
+//		return listParas;
+//	}
 
 	@PostMapping("/jobs/{jobName}")
 	public ResponseEntity<?> startJob(@PathVariable("jobName") String jobName,
