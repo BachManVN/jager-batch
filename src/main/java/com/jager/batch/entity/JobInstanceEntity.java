@@ -1,9 +1,17 @@
 package com.jager.batch.entity;
 
 
+import lombok.*;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "BATCH_JOB_INSTANCE")
 public class JobInstanceEntity {
 
@@ -20,35 +28,7 @@ public class JobInstanceEntity {
     @Column(name = "JOB_KEY", updatable = false, insertable = false)
     private String jobKey;
 
-    public long getId() {
-        return id;
-    }
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "jobInstance")
+    private List<JobExecutionEntity> jobExecutions;
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public Long getVersion() {
-        return version;
-    }
-
-    public void setVersion(Long version) {
-        this.version = version;
-    }
-
-    public String getJobName() {
-        return jobName;
-    }
-
-    public void setJobName(String jobName) {
-        this.jobName = jobName;
-    }
-
-    public String getJobKey() {
-        return jobKey;
-    }
-
-    public void setJobKey(String jobKey) {
-        this.jobKey = jobKey;
-    }
 }

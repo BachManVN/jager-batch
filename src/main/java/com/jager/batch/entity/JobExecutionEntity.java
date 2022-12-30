@@ -3,10 +3,7 @@ package com.jager.batch.entity;
 
 import javax.persistence.*;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -17,6 +14,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Getter
+@Setter
 public class JobExecutionEntity {
 
     @Id
@@ -50,10 +49,9 @@ public class JobExecutionEntity {
     @Column(name = "JOB_CONFIGURATION_LOCATION", updatable = false, insertable = false)
     private String jobConfigurationLocation;
 
-    @Column(name = "CREATE_BY", updatable = false, insertable = false)
-    private String createBy;
     
-    @OneToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @EqualsAndHashCode.Exclude @ToString.Exclude
     @JoinColumn(name = "JOB_INSTANCE_ID", updatable = false, insertable = false)
     private JobInstanceEntity jobInstance;
 

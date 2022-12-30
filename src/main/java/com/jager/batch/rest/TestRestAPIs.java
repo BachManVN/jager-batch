@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.LinkedList;
@@ -30,8 +31,8 @@ public class TestRestAPIs {
 	Job job;
 	
 	
-	@GetMapping("/hello")
-	public String adminAccess() {
+	@PostMapping("/api/startJob")
+	public List<JobExecutionParameterInputDTO> adminAccess() {
 		
 		System.out.println("job "+ job.getName());
 		jobOperator.getJobNames().forEach(name ->{
@@ -43,6 +44,6 @@ public class TestRestAPIs {
 		//listParas.add(new JobExecutionParameterInputDTO().builder().name("runtId").value(System.currentTimeMillis()+"").build());
 		//jobRestService.start("studentGradeReportJob",listParas);
 		jobRestService.start("studentGradeReportJob",listParas);
-		return "Hello";
+		return listParas;
 	}
 }
