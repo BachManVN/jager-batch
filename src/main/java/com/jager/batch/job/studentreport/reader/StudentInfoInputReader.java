@@ -23,7 +23,7 @@ public class StudentInfoInputReader<StudentInfo> implements ItemReader<StudentIn
         if(!checkAvailableStudentInfo()){
             return null;
         }
-        if(studentInfo.size() - 1 == currentIndex){
+        if(studentInfo.size()  <= currentIndex){
             return null;
         }
 
