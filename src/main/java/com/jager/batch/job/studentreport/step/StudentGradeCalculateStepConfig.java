@@ -13,6 +13,9 @@ import org.springframework.context.annotation.Configuration;
 
 import com.jager.batch.job.studentreport.entity.ProcessedStudentGrade;
 import com.jager.batch.job.studentreport.entity.StudentGrade;
+import org.springframework.dao.EmptyResultDataAccessException;
+
+import java.sql.SQLDataException;
 
 @Configuration
 public class StudentGradeCalculateStepConfig {
@@ -28,10 +31,15 @@ public class StudentGradeCalculateStepConfig {
     ) {
         return stepBuilderFactory
                 .get("studentGradeCalculateStep")
-                .<StudentGrade, ProcessedStudentGrade>chunk(1)
+                .<StudentGrade, ProcessedStudentGrade>chunk(3)
                 .reader(studentGradeCalculationReader)
                 .processor(studentGradeCalculateProcessor)
                 .writer(studentGradeCalculateJdbcWriter)
+                .faultTolerant()
+//                .skip(NullPointerException.class)
+//                .skipLimit(200)
+//                .skip(EmptyResultDataAccessException.class)
+//                .skipLimit(200)
                 .build();
     }
 

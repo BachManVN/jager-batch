@@ -13,14 +13,13 @@ import com.jager.batch.job.studentreport.entity.StudentGrade;
 @Configuration
 public class StudentGradeCalculateProcessorConfig {
 
-    private static final String IS_SIMULATION = "isSimulation";
+    private static final String IS_MANUAL_GRADING = "isManualGrading";
     @Bean
     @StepScope
     public ItemProcessor<StudentGrade, ProcessedStudentGrade> studentGradeCalculateProcessor(
-            @Value("#{jobParameters['"+ IS_SIMULATION +"']}") boolean isSimulation
+            @Value("#{jobParameters['"+ IS_MANUAL_GRADING +"']}") boolean isManualGrading
     ) {
         StudentGradeCalculateProcessor gradeCalculateProcessor = new StudentGradeCalculateProcessor();
-        gradeCalculateProcessor.setSimulation(isSimulation);
         return gradeCalculateProcessor;
     }
 }

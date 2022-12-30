@@ -23,8 +23,9 @@ public class StudentGradeCalculateWriterConfig {
     ) {
         return new JdbcBatchItemWriterBuilder<ProcessedStudentGrade>()
                 .dataSource(dataSource)
-                .sql("INSERT INTO STUDENT_GRADE_REPORT (student_code,student_grade,result) VALUES (?,?,?)")
+                .sql("UPDATE STUDENT_GRADE_REPORT set student_grade = ?, result = ? where student_code = ?")
                 .itemPreparedStatementSetter(itemPreparedStatementSetter())
+                .assertUpdates(true)
                 .build();
     }
 
@@ -32,9 +33,9 @@ public class StudentGradeCalculateWriterConfig {
         return new ItemPreparedStatementSetter<ProcessedStudentGrade>() {
             @Override
             public void setValues(ProcessedStudentGrade processedStudentGrade, PreparedStatement preparedStatement) throws SQLException {
-                preparedStatement.setString(1, processedStudentGrade.getStudentCode());
-                preparedStatement.setDouble(2, processedStudentGrade.getAverageGrade());
-                preparedStatement.setString(3, processedStudentGrade.getResult());
+                preparedStatement.setDouble(1, processedStudentGrade.getAverageGrade());
+                preparedStatement.setString(2, processedStudentGrade.getResult());
+                preparedStatement.setString(3, processedStudentGrade.getStudentCode());
             }
         };
     }

@@ -15,4 +15,10 @@ public class StudentInfoRestClient {
         StudentInfo[] infos = restTemplate.getForObject("http://localhost:6969/api/students", StudentInfo[].class);
         return Arrays.asList(infos);
     }
+
+    public Integer getPlusScore(){
+        RestTemplate restTemplate = new RestTemplate();
+        Integer plus = restTemplate.getForObject("http://localhost:6969/api/plusscore", Integer.class);
+        return plus;
+    }
 }

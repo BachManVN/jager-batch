@@ -20,15 +20,17 @@ public class StudentInfoInputStepConfig {
     @Bean
     public Step studentInfoInputStep(
             ItemReader<StudentInfo> studentInfoInputReader,
+            ItemWriter<StudentInfo> studentReportCleanUpJdbcWriter,
             ItemWriter<StudentInfo> studentInfoInputJdbcWriter
     ) {
         return stepBuilderFactory
                 .get("studentInfoInputStep")
-                .<StudentInfo,StudentInfo>chunk(100)
+                .<StudentInfo,StudentInfo>chunk(1)
                 .reader(studentInfoInputReader)
                 .writer(studentInfoInputJdbcWriter)
-                .faultTolerant()
+//                .faultTolerant()
+//                .retryLimit(10)
+//                .retry(RuntimeException.class)
                 .build();
     }
-
 }

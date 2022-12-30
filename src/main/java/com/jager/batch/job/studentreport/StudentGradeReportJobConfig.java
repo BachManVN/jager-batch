@@ -16,12 +16,13 @@ public class StudentGradeReportJobConfig {
     private JobBuilderFactory jobBuilderFactory;
 
     @Bean
-    public Job studentGradeReportJob(Step studentGradeCalculateStep,Step studentInfoInputStep,Step studentGradeReportStep) {
+    public Job studentGradeReportJob(Step studentReportCleanUpStep,Step studentGradeCalculateStep,Step studentInfoInputStep,Step studentGradeReportStep) {
         return jobBuilderFactory
                 .get("studentGradeReportJob")
                 .incrementer(new RunIdIncrementer())
-                .start(studentGradeCalculateStep)
+                .start(studentReportCleanUpStep)
                 .next(studentInfoInputStep)
+                .next(studentGradeCalculateStep)
                 .next(studentGradeReportStep)
                 .build();
     }

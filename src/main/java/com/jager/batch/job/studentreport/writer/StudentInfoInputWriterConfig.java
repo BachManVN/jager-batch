@@ -23,9 +23,21 @@ public class StudentInfoInputWriterConfig {
     ) {
         return new JdbcBatchItemWriterBuilder<StudentInfo>()
                 .dataSource(dataSource)
-                .sql("UPDATE STUDENT_GRADE_REPORT SET student_name = ?, student_email= ?  WHERE student_code = ?")
+                .sql("INSERT INTO STUDENT_GRADE_REPORT (student_name, student_email, student_code) VALUES (?,?,?)")
                 .itemPreparedStatementSetter(itemPreparedStatementSetter())
                 .assertUpdates(false)
+                .build();
+    }
+
+    @Bean
+    public JdbcBatchItemWriter<StudentInfo> studentReportCleanUpJdbcWriter(
+            @Qualifier("springDataSource") DataSource dataSource
+    ) {
+        return new JdbcBatchItemWriterBuilder<StudentInfo>()
+                .dataSource(dataSource)
+                .sql("Delete from STUDENT_GRADE_REPORT")
+                .itemPreparedStatementSetter(itemPreparedStatementSetter())
+                .assertUpdates(true)
                 .build();
     }
 
