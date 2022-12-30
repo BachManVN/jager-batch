@@ -41,7 +41,7 @@ public class StudentReportWriterConfig {
 
 	) {
 		String reportName = "report"+ runId +".csv";
-		Resource output = new FileSystemResource(path + reportName);
+		Resource output = new FileSystemResource(path +"/"+runId+"/"+ reportName);
 		String [] colValues;
 		if(!isManualGrading){
 			colValues = new String[]{"studentCode", "studentName", "studentEmail", "studentGrade", "result"};

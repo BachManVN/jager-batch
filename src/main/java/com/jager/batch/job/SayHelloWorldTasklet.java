@@ -17,9 +17,11 @@ public class SayHelloWorldTasklet implements Tasklet {
     @Override
     public RepeatStatus execute(StepContribution stepContribution, ChunkContext chunkContext) throws Exception {
         System.out.println("Hello, World!");
-        for(StudentInfo info : studentInfoRestClient.getAllStudentInfo()){
-            System.out.println("studnet "+info.getStudentCode());
-        }
+        System.out.println(" +\"\"\"\"\"+ ");
+        System.out.println("[| o o |]");
+        System.out.println(" |  ^  | ");
+        System.out.println(" | '-' | ");
+        System.out.println(" +-----+ ");
         return RepeatStatus.FINISHED;
     }
 

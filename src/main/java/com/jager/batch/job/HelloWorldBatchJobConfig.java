@@ -27,10 +27,10 @@ public class HelloWorldBatchJobConfig {
     JobRegistry jobRegistry;
     
     
-    @Bean(name="helloWorld")
+    @Bean(name="helloWorldJob")
     public Job sayHelloWorld(Step stepToSayHelloWorld) throws DuplicateJobException {
     	Job job = jobBuilderFactory
-                .get("helloWorld")
+                .get("helloWorldJob")
                 .start(stepToSayHelloWorld)
                 .incrementer(new RunIdIncrementer())
                 .build();
