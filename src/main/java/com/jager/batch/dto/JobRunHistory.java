@@ -23,4 +23,5 @@ public class JobRunHistory {
 
     private LocalDateTime endTime;
     private String status;
+    private String runId;
 }

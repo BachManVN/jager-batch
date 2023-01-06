@@ -12,7 +12,7 @@ public class StudentInfoRestClient {
 
     public List<StudentInfo> getAllStudentInfo(){
         RestTemplate restTemplate = new RestTemplate();
-        StudentInfo[] infos = restTemplate.getForObject("http://localhost:6969/api/students", StudentInfo[].class);
+        StudentInfo[] infos = restTemplate.getForObject("http://localhost:8081/api/students", StudentInfo[].class);
         return Arrays.asList(infos);
     }
 }
